@@ -58,6 +58,7 @@ func handler(rw http.ResponseWriter, r *http.Request) {
 }
 
 func RunHeartbeatService(address string) {
-	http.HandleFunc("/heartbeat", handler)
-	log.Println(http.ListenAndServe(address, nil))
+	mux := http.NewServeMux()
+	mux.HandleFunc("/heartbeat/",handler)
+	log.Println(http.ListenAndServe(address, mux))
 }
